@@ -1,4 +1,4 @@
-# ** Problem Statements ** #
+# Problem Statements #
 
 ## Problem Statement #1 ##
 - College Students can easily exchange goods with local students and make money by recycling their old items they don't use, which will improve community cohesiveness and reduce waste by trading used goods.
