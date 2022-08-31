@@ -6,5 +6,5 @@
 ## Problem Statement #2 ##
 - College students within a specific radius of other students can connect buy and sell their items to massage some money.
 
-## Final Statement ##
+## Final Problem Statement ##
 - College Students can easily exchange or sell goods with local students within a certain distance to make money or attain items they need, which will improve community cohesiveness and reduce waste by selling used goods.
