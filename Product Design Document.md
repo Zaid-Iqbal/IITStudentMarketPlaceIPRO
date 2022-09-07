@@ -10,9 +10,9 @@
 
 ### **Description**
 
-College students looking to make extra money off of their items or save money by buying used.
+- College students looking to make extra money off of their items or save money by buying used.
 
-Occupation: Undergradauate and Graduate Students
+- Occupation: Undergradauate and Graduate Students
 
 ## Other Customers and Stakeholders ##
 
