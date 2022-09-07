@@ -2,7 +2,7 @@
 
 ## **Problem Statement**
 
-- College Students can easily exchange or sell goods with local students within a certain distance to make money or attain items they need, which will improve community cohesiveness and reduce waste by selling used goods.
+- College Students can easily exchange or sell goods with local students within a certain distance to make money or attain items they need, improving community cohesiveness and reduce waste by selling used goods.
 
 ## **Customer**
 
