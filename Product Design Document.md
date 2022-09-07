@@ -4,8 +4,6 @@
 
 - College Students can easily exchange or sell goods with local students within a certain distance to make money or attain items they need, which will improve community cohesiveness and reduce waste by selling used goods.
 
-- College students within a specific radius of other students can connect to buy and sell their items to make some money and put old items to use.
-
 ## **Customer**
 
 ### **Description**
