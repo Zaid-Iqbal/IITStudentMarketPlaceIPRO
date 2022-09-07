@@ -111,8 +111,6 @@ Marcus is an incoming freshman and is living on campus on his own for the first 
 
 ## **How we will productively solve disagreement**
 
-- We will use Github for version control. Team-members will push their finished code to a branch to ensure the main branch remains bug-free.
-
 - We will talk it out and understand the perspective of our fellow team members.
 
 - If we cannot figure it out, we will ask our professor to mediate or have a group vote
