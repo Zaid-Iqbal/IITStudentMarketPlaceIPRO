@@ -39,7 +39,7 @@ Web Application
 
 - FE: React.js
 - BE: Django (Python)
-- DB: SQLite
+- DB: Oracle
 
 ## **Top Application Capabilities (name at least 5)**
 
