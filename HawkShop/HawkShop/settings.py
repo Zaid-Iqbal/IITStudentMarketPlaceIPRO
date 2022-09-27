@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Product_Search.apps.ProductSearchConfig',
+    'Product_Upload.apps.ProductUploadConfig',
+    'User_Registration.apps.UserRegistrationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
