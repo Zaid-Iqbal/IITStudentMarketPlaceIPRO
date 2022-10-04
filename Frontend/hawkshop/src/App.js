@@ -1,0 +1,32 @@
+import Navbar from "./Components/navbar";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from "./Components/home";
+import Search from "./Components/search";
+import Chat from "./Components/chat";
+import Account from "./Components/account";
+import Settings from "./Components/settings";
+import './App.css'
+
+function App() {
+
+
+
+  return (
+    <Router>
+        <div className="App m-2">
+            <Navbar></Navbar>
+            <div className="content">
+                <Routes>
+                    <Route path="/search" element={<Search></Search>} />
+                    <Route path="/chat" element={<Chat></Chat>} />
+                    <Route path="/account" element={<Account></Account>} />
+                    <Route path="/settings" element={<Settings></Settings>} />
+                    <Route path="/" element={<Home></Home>} />
+                </Routes>
+            </div>
+        </div>
+    </Router>
+  );
+}
+
+export default App;
