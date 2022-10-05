@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from HawkShop.Product_Upload.models import Product
+from Product_Upload.models import Product
 from django.db import connection, transaction
 
 # def say_hello(request):
