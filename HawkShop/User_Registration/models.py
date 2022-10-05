@@ -4,14 +4,14 @@ class User(models.Model):
     user = models.IntegerField()
     name = models.CharField(max_length = 100)
     email = models.CharField(max_length = 100)
-    phoneNumber = models.IntegerField()
+    phone_number = models.IntegerField()
     password = models.CharField(max_length=100)
-    creditCard = models.IntegerField()
+    credit_card = models.IntegerField()
 
 class Product(models.Model):
     product = models.IntegerField()
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    productName = models.CharField(max_length=250)
+    product_name = models.CharField(max_length=250)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     description = models.TextField()
     condition = models.CharField(max_length=100)
