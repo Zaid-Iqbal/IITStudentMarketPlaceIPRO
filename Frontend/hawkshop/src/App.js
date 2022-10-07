@@ -6,22 +6,25 @@ import Chat from "./Components/chat";
 import Account from "./Components/account";
 import Settings from "./Components/settings";
 import './App.css'
+import itemPageS from "./Components/itemPageS";
+import ItemPageS from "./Components/itemPageS";
 
 function App() {
 
 
-
+//
   return (
     <Router>
         <div className="App m-2">
             <Navbar></Navbar>
             <div className="content">
                 <Routes>
+                    <Route exact path="/itempages/:itemID" element={<ItemPageS></ItemPageS>} />
                     <Route path="/search" element={<Search></Search>} />
                     <Route path="/chat" element={<Chat></Chat>} />
                     <Route path="/account" element={<Account></Account>} />
                     <Route path="/settings" element={<Settings></Settings>} />
-                    <Route path="/" element={<Home></Home>} />
+                    <Route path="" element={<Home></Home>} />
                 </Routes>
             </div>
         </div>
