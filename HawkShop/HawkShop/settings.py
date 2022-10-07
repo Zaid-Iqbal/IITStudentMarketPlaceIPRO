@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'Product_Search',
     'Product_Upload',
     'User_Registration',
+    'react.apps.ReactConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
