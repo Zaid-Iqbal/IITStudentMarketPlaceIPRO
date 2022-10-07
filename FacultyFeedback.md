@@ -11,11 +11,13 @@
 ## Week 4 ##
 
 ## Week 5 ##
-- Try to have a single owners per story
-- Have a description for each story
-- Have acceptance criteria for each story
 
 ## Week 6 ##
+- Parth is sprint review lead
+- Look at improving acceptance criterion
+- Mid-term presentation upcoming Oct 11
+- Consider labels to identify key stories for the mid-term
+- Sprint lead please lead the team in their first retro - https://retrotool.app/
 
 ## Week 7 ##
 
