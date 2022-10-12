@@ -22,6 +22,11 @@
 ## Week 7 ##
 
 ## Week 8 ##
+- Don't say someone else (say <person name> will be taking over screen sharing to the demo)
+- You want transitions if you are switching speakers (not someone else, but person name)
+- Why just college students? - wow you read my mind and answered this
+- Know your presentation order and avoid screen shares switches
+- Don't say I am going to do the demo, say "hello, I am <person name> and I am  going to demo the demo
 
 ## Week 9 ##
 
