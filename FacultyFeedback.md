@@ -33,7 +33,10 @@ Please add an item to your boards to do this github.com/mschray/IPro497Sample/bl
 - Don't say I am going to do the demo, say "hello, I am <person name> and I am  going to demo the demo
 
 ## Week 9 ##
-
+- Make sure update, remove or edit stories as needed to keep them up to date - this is called Backlog refinement
+- Please make sure the stories have acceptance criterion
+- For learning stories make sure you have acceptance criterion
+  
 ## Week 10 ##
 
 ## Week 11 ##
