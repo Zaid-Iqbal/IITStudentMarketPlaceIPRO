@@ -1,5 +1,5 @@
 import {Component} from "react";
-
+import Upload from "./upload"
 class Chat extends Component{
 
 
@@ -7,6 +7,7 @@ class Chat extends Component{
         return(
             <div>
                 <h1>Chat</h1>
+                <Upload></Upload>
             </div>
         );
     }
