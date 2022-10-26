@@ -38,7 +38,12 @@ Please add an item to your boards to do this github.com/mschray/IPro497Sample/bl
 - For learning stories make sure you have acceptance criterion
   
 ## Week 10 ##
-
+- Board looks good - keep working on acceptance criterion
+- Good move to React and Node
+- Looking forward to the database decision
+- Nice sprint lead work today
+- Please be ready to demo - when you have working code demoing should not be a big deal
+  
 ## Week 11 ##
 
 ## Week 12 ##
