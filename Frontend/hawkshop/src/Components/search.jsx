@@ -8,6 +8,7 @@ class Search extends Component{
         super();
         this.state = {value: '',
                 orgitems:[
+                    // dummy data
                     {id:'1230', name:'Laptop', price:23, condition:'Bad' },
                     {id:'1231', name:'English Book', price:450, condition:'Fair' },
                     {id:'1232', name:'Fridge', price:203, condition:'Good' },
@@ -27,6 +28,7 @@ class Search extends Component{
                     {id:'1246', name:'Dell Laptop', price:450, condition:'Fair' },
                     {id:'1247', name:'Rug', price:203, condition:'Good' },
                 ],
+                // where the searched data should go to
                 items:[]
 
                     };

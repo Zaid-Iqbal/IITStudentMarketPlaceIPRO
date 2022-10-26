@@ -1,6 +1,5 @@
-// shows the individual item component
-// for use with itemDisplay
-// for search item display
+// item component for the itemDisplayA for account page
+
 import {Component} from "react";
 
 class Item extends Component{
@@ -19,7 +18,7 @@ class Item extends Component{
     }
 }
 
-
+// todo change the link to the edit itemPageE
 
 
 export default Item;
