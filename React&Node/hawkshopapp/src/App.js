@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Components/navbar";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from "./Components/home";
+import Search from "./Components/search";
+import Chat from "./Components/chat";
+import Account from "./Components/account";
+import Settings from "./Components/settings";
+import './App.css'
+import itemPageS from "./Components/itemPageS";
+import ItemPageS from "./Components/itemPageS";
 
 function App() {
+
+
+//
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <div className="App m-2">
+            <Navbar></Navbar>
+            <div className="content">
+                <Routes>
+                    <Route exact path="/itempages/:itemID" element={<ItemPageS></ItemPageS>} />
+                    <Route path="/search" element={<Search></Search>} />
+                    <Route path="/chat" element={<Chat></Chat>} />
+                    <Route path="/account" element={<Account></Account>} />
+                    <Route path="/settings" element={<Settings></Settings>} />
+                    <Route path="" element={<Home></Home>} />
+                </Routes>
+            </div>
+        </div>
+    </Router>
   );
 }
 
