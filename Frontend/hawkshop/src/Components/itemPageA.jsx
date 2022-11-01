@@ -39,7 +39,7 @@ class ItemPageS extends Component{
         );
     }
 }
-
+// make the actions for the button
 // todo get the stuff from backend
 // send new stuff to backend
 
