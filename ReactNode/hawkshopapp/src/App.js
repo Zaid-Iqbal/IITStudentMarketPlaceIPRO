@@ -8,6 +8,7 @@ import Settings from "./Components/settings";
 import './App.css'
 import itemPageS from "./Components/itemPageS";
 import ItemPageS from "./Components/itemPageS";
+import Upload from "./Components/upload";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route exact path="/itempages/:itemID" element={<ItemPageS></ItemPageS>} />
+                    <Route exact path="/itempages/:itemID" element={<ItemPageS></ItemPageS>} />
+                    <Route path="/upload" element={<Upload></Upload>} />
                     <Route path="/search" element={<Search></Search>} />
                     <Route path="/chat" element={<Chat></Chat>} />
                     <Route path="/account" element={<Account></Account>} />

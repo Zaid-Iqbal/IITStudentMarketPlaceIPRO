@@ -39,16 +39,18 @@ class Account extends Component{
         return(
             <div>
                 <h1>Account</h1>
-                <h1>addbutton link to kushs page</h1>
                 <h1>edit item page</h1>
-                <button type="button" className="btn btn-primary btn-floating">Add</button>
+
                 <ItemDisplayA items={this.state.orgitems}></ItemDisplayA>
+                <a  href="http://localhost:3000/upload">
+                    <button type="button" className="btn btn-primary btn-floating">Add</button>
+                </a>
             </div>
         );
     }
 }
 
-
+// todo get floating add button
 
 
 export default Account;
