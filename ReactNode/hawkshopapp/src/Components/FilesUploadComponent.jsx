@@ -7,9 +7,22 @@ class FilesUploadComponent extends Component{
         this.state = {
           image: null
         };
+        this.product = {
+          price: null,
+          name: null,
+          img: null,
+          description: null,
+        }
     
        // if we are using arrow function binding is not required
        //  this.onImageChange = this.onImageChange.bind(this);
+    }
+
+    uploadProduct(){
+      this.product.name = document.getElementById("ItemName").value; 
+      this.product.price = document.getElementById("price").value;
+      this.product.description = document.getElementById("description").value;
+      this.product.img = this.state.image;
     }
 
     onImageChange = event => {
@@ -29,13 +42,31 @@ class FilesUploadComponent extends Component{
 
     render() {
         return (
-          <div>
-            <div>
-              <div>
-                <img src={this.state.image} alt="should work" width="300" height="300" />
-                <h1>Select Image</h1>
-                <input type="file" name="myImage" onChange={this.onImageChange} />
-                <button onClick={this.alertLog} >This</button>
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center text-black border-secondary mb-3 .mx-auto">
+                <h1 class="card-title">Upload Item</h1>
+                <div class="card-body">
+                  <img src={this.state.image} width="300" height="300" />
+                  <input type="file" name="myImage" onChange={this.onImageChange} />
+                  <div>
+                      <input type="text" id="ItemName" class="form-control" placeholder="Item Name" aria-label="ItemName" aria-describedby="basic-addon1"/>
+                  </div>
+                  <div class="input-group price">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    </div>
+                      <input type="number" id="price" class="form-control" aria-label="Amount (to the nearest dollar)"/>
+                      <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div>
+                      <input type="text" id="description" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1"/>
+                  </div>
+                  <button type="button" class="btn btn-primary" onClick={this.uploadProduct}>Upload Product</button>
+                  {/* <button onClick={this.alertLog} >This</button> */}
+                </div>
               </div>
             </div>
           </div>
