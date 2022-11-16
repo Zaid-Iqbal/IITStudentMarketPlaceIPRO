@@ -31,7 +31,7 @@ var con = mysql.createConnection({
 // })
 
 
-// //all records from customers table
+// //first record product ID from customers table
 // var sql = "SELECT * FROM customers"
 // con.query(sql, function(err, result)
 // {
@@ -45,3 +45,13 @@ con.query(sql, function(err, result)
 {
   console.log(result);      //gets val of userID column for row 0
 })
+
+// //all records from products table
+// var sql = "SELECT * FROM customers"
+// con.query(sql, function(err, result)
+// {
+//   console.log(result);      //gets val of userID column for row 0
+// })
+
+
+con.end();
