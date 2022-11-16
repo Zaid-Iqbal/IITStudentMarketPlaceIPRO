@@ -53,31 +53,31 @@ class Search extends Component{
         var items = [];
         var input = this.state.value.toLowerCase()
         
-        // //search in aws products
-        // var mysql = require('mysql');
-        // var sql = "SELECT * FROM products WHERE name = ${input}"
-        // var con = mysql.createConnection({
-        //     host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
-        //     user: "admin",
-        //     password: "password", 
-        //     port: '3306',
-        //     database: "hs_db"
-        //   });
-        // con.query(sql, function(err, result)
-        // {
-        //     if (err) 
-        //         throw err;
-        //     else
-        //         var usersRows = JSON.parse(JSON.stringify(result));
-        //         for (let i = 0; i<usersRows.length; i++){
-        //             if(usersRows[i]['name'].includes(input));{
-        //                 console.log(usersRows[i]['name'])
-        //                 items.push(usersRows[i]['name']);
-        //             }
-        //         }
-        //         console.log(usersRows);
-        // })
-        // con.end();
+        //search in aws products
+        var mysql = require('mysql');
+        var sql = "SELECT * FROM products WHERE name = ${input}"
+        var con = mysql.createConnection({
+            host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+            user: "admin",
+            password: "password", 
+            port: '3306',
+            database: "hs_db"
+          });
+        con.query(sql, function(err, result)
+        {
+            if (err) 
+                throw err;
+            else
+                var usersRows = JSON.parse(JSON.stringify(result));
+                for (let i = 0; i<usersRows.length; i++){
+                    if(usersRows[i]['name'].includes(input));{
+                        console.log(usersRows[i]['name'])
+                        items.push(usersRows[i]['name']);
+                    }
+                }
+                console.log(usersRows);
+        })
+        con.end();
 
 
         // // this was demo search
