@@ -41,10 +41,11 @@ class FilesUploadComponent extends Component{
           else
               var usersRows = JSON.parse(JSON.stringify(result));
               for (let i = 0; i<usersRows.length; i++){
-                  if(usersRows[i]['name'].includes(input));{
-                      console.log(usersRows[i]['name'])
-                      items.push(usersRows[i]['name']);
-                  }
+                console.log('hi');
+                  // if(usersRows[i]['name'].includes(input));{
+                  //     console.log(usersRows[i]['name'])
+                  //     items.push(usersRows[i]['name']);
+                  // }
               }
               console.log(usersRows);
       })
