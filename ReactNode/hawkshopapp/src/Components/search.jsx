@@ -1,11 +1,14 @@
 import {Component} from "react";
 import ItemDisplay from "./itemDisplay";
 import item from "./item";
+import { test } from "./DB_functions";
 
 
 class Search extends Component{
     constructor() {
         super();
+
+        /* Dummy Data */
         this.state = {value: '',
                 orgitems:[
                     // dummy data
@@ -34,6 +37,8 @@ class Search extends Component{
                     };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        
+
     }
 
     handleChange(event) {
@@ -43,15 +48,46 @@ class Search extends Component{
     handleSubmit(event) {
         console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
+        
+        
+        var items = [];
+        var input = this.state.value.toLowerCase()
+        
+        //search in aws
+        var mysql = require('mysql');
+        var sql = "SELECT * FROM customers WHERE name = ${input}"
+        var con = mysql.createConnection({
+            host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+            user: "admin",
+            password: "password", 
+            port: '3306',
+            database: "hs_db"
+          });
+        con.query(sql, function(err, result)
+        {
+            if (err) 
+                throw err;
+            else
+                var usersRows = JSON.parse(JSON.stringify(result));
+                for (let i = 0; i<usersRows.length; i++){
+                    if(usersRows[i]['name'].includes(input));{
+                        console.log(usersRows[i]['name'])
+                        items.push(usersRows[i]['name']);
+                    }
+                }
+                console.log(usersRows);
+        })
+        con.end();
 
-        // this was demo search
-        const items = [];
-        for (let i = 0; i<this.state.orgitems.length; i++){
-            if (this.state.orgitems[i].name.toLowerCase().includes(this.state.value.toLowerCase())){
-                console.log(this.state.orgitems[i].name)
-                items.push(this.state.orgitems[i]);
-            }
-        }
+
+        // // this was demo search
+        // const items = [];
+        // for (let i = 0; i<this.state.orgitems.length; i++){
+        //     if (this.state.orgitems[i].name.toLowerCase().includes(this.state.value.toLowerCase())){
+        //         console.log(this.state.orgitems[i].name)
+        //         items.push(this.state.orgitems[i]);
+        //     }
+        // }
 
         this.setState({items});
 
