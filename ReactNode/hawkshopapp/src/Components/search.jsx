@@ -6,6 +6,22 @@ import item from "./item";
 class Search extends Component{
     constructor() {
         super();
+
+        var mysql = require('mysql');
+        var con = mysql.createConnection({
+            host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+            user: "admin",
+            password: "password", 
+            port: '3306',
+            database: "hs_db"
+        });
+        con.connect(function(err) {
+            if (err) 
+                throw err;
+            else
+                console.log("Connected!");
+        });
+
         this.state = {value: '',
                 orgitems:[
                     // dummy data
@@ -43,15 +59,34 @@ class Search extends Component{
     handleSubmit(event) {
         console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
+        
+        var input = this.state.value.toLowerCase()
+        //search in aws
+        var sql = "SELECT * FROM customers WHERE name = ${input}"
+        con.query(sql, function(err, result)
+        {
+            if (err) 
+                throw err;
+            else
+                usersRows = JSON.parse(JSON.stringify(result));
+                for (let i = 0; i<usersRows.length; i++){
+                    if(usersRows[i]['name'].includes(input));{
+                        console.log(usersRows[i]['name'])
+                        items.push(usersRows[i]['name']);
+                    }
+                }
+                console.log(usersRows);
+        })
 
-        // this was demo search
-        const items = [];
-        for (let i = 0; i<this.state.orgitems.length; i++){
-            if (this.state.orgitems[i].name.toLowerCase().includes(this.state.value.toLowerCase())){
-                console.log(this.state.orgitems[i].name)
-                items.push(this.state.orgitems[i]);
-            }
-        }
+
+        // // this was demo search
+        // const items = [];
+        // for (let i = 0; i<this.state.orgitems.length; i++){
+        //     if (this.state.orgitems[i].name.toLowerCase().includes(this.state.value.toLowerCase())){
+        //         console.log(this.state.orgitems[i].name)
+        //         items.push(this.state.orgitems[i]);
+        //     }
+        // }
 
         this.setState({items});
 
