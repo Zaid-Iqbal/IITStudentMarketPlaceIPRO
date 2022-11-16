@@ -1,18 +1,16 @@
 import {Component} from "react";
-import {useParams} from "react-router-dom";
 
 class ItemPageS extends Component{
     constructor() {
         super();
         this.itemID = window.location.pathname.split('/')[2];
         this.state={
-            details:[
-                {name:'name'},
-                {price:'price'},
-                {description:'description'},
-                {condition:'condition'},
-                {seller:'seller'}
-            ]
+            name:'name',
+            price:'price',
+            description:'description',
+            condition:'condition',
+            seller:'seller',
+
         }
     }
 
@@ -20,7 +18,11 @@ class ItemPageS extends Component{
         return(
             <div>
                 <h1>Product Display</h1>
-                <h1>{this.itemID}</h1>
+                <h1>{this.state.name}</h1>
+                <h1>{this.state.price}</h1>
+                <h1>{this.state.description}</h1>
+                <h1>{this.state.condition}</h1>
+                <h1>{this.state.seller}</h1>
             </div>
         );
     }

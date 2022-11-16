@@ -52,6 +52,11 @@ Please add an item to your boards to do this github.com/mschray/IPro497Sample/bl
 - Think about the stories that you need to complete for the final demo
   
 ## Week 12 ##
+- Good conversation on acceptance criterion, strings in DB vs. byte array
+- Remember to use standup to quickly sync with your other teammates at the start of team working time
+- Use labels to identify the stories that need to be completed for the final demo
+- Dry run on 11/22, final presentation on 11/29 and innovation day on 12/2.
+- Dry run and final presentation demo template - https://github.com/mschray/IPro497Sample/blob/main/Course%20Content/Final%20Presentation%20Template.pptx  
 
 ## Week 13 ##
 

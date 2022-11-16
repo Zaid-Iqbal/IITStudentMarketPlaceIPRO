@@ -11,7 +11,9 @@ class Item extends Component{
                 <h1>{this.props.name}</h1>
                 <h3>${this.props.price}</h3>
                 <h3>{this.props.condition}</h3>
-                <a href={`http://localhost:3000/itempages/${this.props.id}`}><button>=></button></a>
+                <a href={`http://localhost:3000/itempagea/${this.props.id}`}><button>=></button></a>
+
+
 
             </div>
         );
