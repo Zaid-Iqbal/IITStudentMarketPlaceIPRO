@@ -1,5 +1,6 @@
 import {Component} from "react";
 import FilesUploadComponent from "./FilesUploadComponent"
+import LoginPage from "./loginPage";
 
 class Upload extends Component{
 
@@ -8,7 +9,7 @@ class Upload extends Component{
     render(){
         return (
             <div>
-                <loginPage></loginPage>
+                <LoginPage></LoginPage>
             </div>
         )
     }
