@@ -59,5 +59,8 @@
     "fs": false,
     "path": false,
     "os": false
+  },
+  "devDependencies": {
+    "react-error-overlay": "^6.0.9"
   }
 }
