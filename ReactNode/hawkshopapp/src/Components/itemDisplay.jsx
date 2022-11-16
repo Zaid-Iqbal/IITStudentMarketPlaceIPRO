@@ -16,6 +16,8 @@ class ItemDisplay extends Component{
     render() {
         return(
             <div class='p-2'>
+
+
                 {this.props.items.map(item => (
                     <Item key = {item.id}
                           name = {item.name}

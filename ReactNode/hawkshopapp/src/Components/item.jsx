@@ -15,6 +15,7 @@ class Item extends Component{
                 <a href={`http://localhost:3000/itempages/${this.props.id}`}><button>=></button></a>
 
             </div>
+
         );
     }
 }

@@ -3,7 +3,6 @@
 // will be able to display all the items when given a list of items
 // could be used for search and account
 import {Component} from "react";
-import ItemDisplayA from "./itemDisplayA";
 import ItemA from "./itemA";
 
 class ItemDisplay extends Component{
@@ -18,7 +17,7 @@ class ItemDisplay extends Component{
 
     render() {
         return(
-            <div class='p-2'>
+            <div class='card-deck '>
                 {this.props.items.map(item => (
                     <ItemA key = {item.id}
                            name = {item.name}

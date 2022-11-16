@@ -4,6 +4,7 @@ class ItemPageS extends Component{
     constructor() {
         super();
         this.itemID = window.location.pathname.split('/')[2];
+        // all the vars without N at end should be updated by db
         this.state={
             name:'name',
             price:'price',
@@ -58,7 +59,36 @@ class ItemPageS extends Component{
     }
 
     handleSubmit(event) {
-        // send to db and update the  vars with N
+        if (this.state.nameN.length === 0){
+            this.state.nameN = this.state.name;
+        }
+        if (this.state.priceN.length === 0){
+            this.state.priceN = this.state.price;
+        }
+        if (this.state.descriptionN.length === 0){
+            this.state.descriptionN = this.state.description;
+        }
+        if (this.state.conditionN.length === 0){
+            this.state.conditionN = this.state.condition;
+        }
+        if (this.state.soldN.length === 0){
+            this.state.soldN = this.state.sold;
+        }
+
+        const name = this.state.nameN;
+        this.setState({name});
+        const price = this.state.priceN;
+        this.setState({price});
+        const description = this.state.descriptionN;
+        this.setState({description});
+        const condition = this.state.conditionN;
+        this.setState({condition});
+        const sold = this.state.soldN;
+        this.setState({sold});
+
+
+        // todo send to db and update the  vars with N
+        // todo and delete alert when done with sending to db
         alert('name: ' + this.state.nameN +
             ' price: ' + this.state.priceN +
             ' des: ' + this.state.descriptionN +

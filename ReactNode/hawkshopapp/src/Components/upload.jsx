@@ -8,7 +8,7 @@ class Upload extends Component{
     render(){
         return (
             <div>
-                <loginPage></loginPage>
+                <FilesUploadComponent></FilesUploadComponent>
             </div>
         )
     }

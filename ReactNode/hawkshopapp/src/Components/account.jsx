@@ -38,13 +38,11 @@ class Account extends Component{
 
         return(
             <div>
-                <h1>Account</h1>
-                <h1>edit item page</h1>
 
-                <ItemDisplayA items={this.state.orgitems}></ItemDisplayA>
-                <a  href="http://localhost:3000/upload">
-                    <button type="button" className="btn btn-primary btn-floating">Add</button>
+                <a  href="http://localhost:3000/upload" >
+                    <button type="button" className="btn btn-primary btn-floating" >Add New Item</button>
                 </a>
+                <ItemDisplayA items={this.state.orgitems}></ItemDisplayA>
             </div>
         );
     }
