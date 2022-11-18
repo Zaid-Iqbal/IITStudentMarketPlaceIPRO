@@ -23,10 +23,13 @@ class FilesUploadComponent extends Component{
       this.product.price = document.getElementById("price").value;
       this.product.description = document.getElementById("description").value;
       this.product.img = this.state.image;
+      //TODO: item condition needed
+      //TODO: User ID needed
+      //TODO: add IMG column to products table
 
       //upload to in aws products
       var mysql = require('mysql');
-      var sql = "SELECT * FROM products WHERE name = ${input}"
+      var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
       var con = mysql.createConnection({
           host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
           user: "admin",
@@ -34,20 +37,14 @@ class FilesUploadComponent extends Component{
           port: '3306',
           database: "hs_db"
         });
-      con.query(sql, function(err, result)
+      con.query(sql,[/*USER ID*/, this.product.description, /*ITEM CONDITION*/, this.product.price, this.product.name], function(err, result)
       {
-          if (err) 
-              throw err;
-          else
-              var usersRows = JSON.parse(JSON.stringify(result));
-              for (let i = 0; i<usersRows.length; i++){
-                console.log('hi');
-                  // if(usersRows[i]['name'].includes(input));{
-                  //     console.log(usersRows[i]['name'])
-                  //     items.push(usersRows[i]['name']);
-                  // }
-              }
-              console.log(usersRows);
+        if (err) 
+          throw err;
+        else
+        {
+          console.log("Product Uploaded"+result);
+        }
       })
       con.end();
     }
