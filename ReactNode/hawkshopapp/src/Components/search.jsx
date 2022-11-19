@@ -53,9 +53,9 @@ class Search extends Component{
         var items = [];
         var input = this.state.value.toLowerCase()
         
-        //search in aws
+        //search in aws products
         var mysql = require('mysql');
-        var sql = "SELECT * FROM customers WHERE name = ${input}"
+        var sql = "SELECT * FROM products WHERE name = ?"
         var con = mysql.createConnection({
             host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
             user: "admin",
@@ -63,7 +63,7 @@ class Search extends Component{
             port: '3306',
             database: "hs_db"
           });
-        con.query(sql, function(err, result)
+        con.query(sql, input, function(err, result)
         {
             if (err) 
                 throw err;
