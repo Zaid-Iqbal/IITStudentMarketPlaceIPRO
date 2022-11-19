@@ -1,3 +1,4 @@
+/*
 var mysql = require('mysql');
 
 // Test Connection: node demo_db_connection.js
@@ -45,3 +46,4 @@ con.query(sql, function(err, result)
 {
   console.log(result);      //gets val of userID column for row 0
 })
+*/

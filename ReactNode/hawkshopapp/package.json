@@ -13,6 +13,7 @@
     "fs": "^0.0.1-security",
     "mysql": "^2.18.1",
     "net": "^1.0.2",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -59,5 +60,8 @@
     "fs": false,
     "path": false,
     "os": false
+  },
+  "devDependencies": {
+    "react-error-overlay": "^6.0.9"
   }
 }
