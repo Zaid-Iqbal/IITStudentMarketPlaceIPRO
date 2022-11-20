@@ -34,38 +34,58 @@ class FilesUploadComponent extends Component{
       this.state.condition = document.getElementById("condition").value;
       this.state.img = this.state.image;
 
-      if(sessionStorage.getItem("user") == null)
-      {
-        console.log("user not defined. Rerouting to login page...");
-        window.location.href = "/";
-      }
-      else
-      {
-        //TODO: item condition needed
-        //TODO: User ID needed
-        //TODO: add IMG column to products table
+      // if(sessionStorage.getItem("user") == null)
+      // {
+      //   console.log("user not defined. Rerouting to login page...");
+      //   window.location.href = "/";
+      // }
+      // else
+      // {
+      //   //TODO: item condition needed
+      //   //TODO: User ID needed
+      //   //TODO: add IMG column to products table
 
-        //upload to in aws products
-        var mysql = require('mysql');
-        var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
-        var con = mysql.createConnection({
-            host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
-            user: "admin",
-            password: "password", 
-            port: '3306',
-            database: "hs_db"
-          });
-        con.query(sql,[sessionStorage.getItem("user"), this.product.description, /*ITEM CONDITION*/, this.product.price, this.product.name], function(err, result)
+      //   //upload to in aws products
+      //   var mysql = require('mysql');
+      //   var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
+      //   var con = mysql.createConnection({
+      //       host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+      //       user: "admin",
+      //       password: "password", 
+      //       port: '3306',
+      //       database: "hs_db"
+      //     });
+      //   con.query(sql,[sessionStorage.getItem("user"), this.state.description, this.state.condition, this.state.price, this.state.name], function(err, result)
+      //   {
+      //     if (err) 
+      //       throw err;
+      //     else
+      //     {
+      //       console.log("Product Uploaded"+result);
+      //     }
+      //   })
+      //   con.end();
+      // }
+
+      var mysql = require('mysql');
+      var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
+      var con = mysql.createConnection({
+        host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+        user: "admin",
+        password: "password", 
+        port: '3306',
+        database: "hs_db"
+      });
+      con.query(sql,[sessionStorage.getItem("user"), this.state.description, this.state.condition, this.state.price, this.state.name], function(err, result)
+      {
+        if (err) 
+          throw err;
+        else
         {
-          if (err) 
-            throw err;
-          else
-          {
-            console.log("Product Uploaded"+result);
-          }
-        })
-        con.end();
-      }
+          console.log("Product Uploaded"+result);
+        }
+      })
+      con.end();
       
     }
 
