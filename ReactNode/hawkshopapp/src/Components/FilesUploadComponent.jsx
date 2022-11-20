@@ -3,32 +3,38 @@ import  { Navigate } from 'react-router-dom'
 
 class FilesUploadComponent extends Component{
 
+    product = {
+      price: null,
+      name: null,
+      img: null,
+      description: null,
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-          image: null
-        };
-        this.product = {
+          image: null,
           price: null,
           name: null,
           img: null,
           description: null,
-        }
-    
+        };
+   
        // if we are using arrow function binding is not required
-       //  this.onImageChange = this.onImageChange.bind(this);
+       this.uploadProduct = this.uploadProduct.bind(this);
+        
     }
 
     uploadProduct(){
-      this.product.name = document.getElementById("ItemName").value; 
-      this.product.price = document.getElementById("price").value;
-      this.product.description = document.getElementById("description").value;
-      this.product.img = this.state.image;
+      this.state.name = document.getElementById("ItemName").value; 
+      this.state.price = document.getElementById("price").value;
+      this.state.description = document.getElementById("description").value;
+      this.state.img = this.state.image;
 
       if(sessionStorage.getItem("user") == null)
       {
         console.log("user not defined. Rerouting to login page...");
-        return <Navigate to="" />
+        return <Navigate to="/" />
       }
       else
       {
