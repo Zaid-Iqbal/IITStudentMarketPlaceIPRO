@@ -1,5 +1,6 @@
 import {Component} from "react";
-import  { Navigate } from 'react-router-dom'
+import  { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class FilesUploadComponent extends Component{
 
@@ -34,7 +35,7 @@ class FilesUploadComponent extends Component{
       if(sessionStorage.getItem("user") == null)
       {
         console.log("user not defined. Rerouting to login page...");
-        return <Navigate to="/" />
+        window.location.href = "/localhost:300/";
       }
       else
       {
