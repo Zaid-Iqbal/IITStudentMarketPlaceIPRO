@@ -1,6 +1,7 @@
 import {Component} from "react";
-import  { Link } from 'react-router-dom';
-import { withRouter } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore"; 
 
 class FilesUploadComponent extends Component{
 
@@ -27,45 +28,68 @@ class FilesUploadComponent extends Component{
         
     }
 
-    uploadProduct(){
+    async uploadProduct(){
       this.state.name = document.getElementById("ItemName").value; 
       this.state.price = document.getElementById("price").value;
       this.state.description = document.getElementById("description").value;
       this.state.condition = document.getElementById("condition").value;
       this.state.img = this.state.image;
 
-      if(sessionStorage.getItem("user") == null)
-      {
-        console.log("user not defined. Rerouting to login page...");
-        window.location.href = "/";
+      const firebaseConfig = {
+        apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
+        authDomain: "hawkshop-62355.firebaseapp.com",
+        projectId: "hawkshop-62355",
+        storageBucket: "hawkshop-62355.appspot.com",
+        messagingSenderId: "813719104855",
+        appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
+        measurementId: "G-31Q8NF975T"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      try {
+        const docRef = await addDoc(collection(db, "products"), {
+          name: this.state.name,
+          price: this.state.price,
+          description: this.state.description,
+          condition: this.state.condition,
+        });
+      
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
-      else
-      {
-        //TODO: item condition needed
-        //TODO: User ID needed
-        //TODO: add IMG column to products table
+      // if(sessionStorage.getItem("user") == null)
+      // {
+      //   console.log("user not defined. Rerouting to login page...");
+      //   window.location.href = "/";
+      // }
+      // else
+      // {
+      //   //TODO: item condition needed
+      //   //TODO: User ID needed
+      //   //TODO: add IMG column to products table
 
-        //upload to in aws products
-        var mysql = require('mysql');
-        var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
-        var con = mysql.createConnection({
-            host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
-            user: "admin",
-            password: "password", 
-            port: '3306',
-            database: "hs_db"
-          });
-        con.query(sql,[sessionStorage.getItem("user"), this.product.description, /*ITEM CONDITION*/, this.product.price, this.product.name], function(err, result)
-        {
-          if (err) 
-            throw err;
-          else
-          {
-            console.log("Product Uploaded"+result);
-          }
-        })
-        con.end();
-      }
+      //   //upload to in aws products
+      //   var mysql = require('mysql');
+      //   var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
+      //   var con = mysql.createConnection({
+      //       host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+      //       user: "admin",
+      //       password: "password", 
+      //       port: '3306',
+      //       database: "hs_db"
+      //     });
+      //   con.query(sql,[sessionStorage.getItem("user"), this.product.description, /*ITEM CONDITION*/, this.product.price, this.product.name], function(err, result)
+      //   {
+      //     if (err) 
+      //       throw err;
+      //     else
+      //     {
+      //       console.log("Product Uploaded"+result);
+      //     }
+      //   })
+      //   con.end();
+      // }
       
     }
 

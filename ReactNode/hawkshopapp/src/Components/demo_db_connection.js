@@ -12,6 +12,6 @@
 //   console.log("Connected!");
 // });
 
-// // export function conntectToDB(){
-// //   alert('hi');
-// // }
+// export function conntectToDB(){
+//   alert('hi');
+// }
