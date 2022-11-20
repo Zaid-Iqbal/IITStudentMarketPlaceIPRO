@@ -22,6 +22,7 @@ class LoginPage extends Component{
         // leave these for zaid to use with the database
         const email = event.target[0].value;
         const password = event.target[1].value;
+        sessionStorage.setItem("user",email);
     }
 
     
