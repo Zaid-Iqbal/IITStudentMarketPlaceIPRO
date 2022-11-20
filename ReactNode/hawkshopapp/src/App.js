@@ -28,7 +28,7 @@ function App() {
                     <Route path="/chat" element={<Chat></Chat>} />
                     <Route path="/account" element={<Account></Account>} />
                     <Route path="/settings" element={<Settings></Settings>} />
-                    <Route path="" element={<Home></Home>} />
+                    <Route path="/" element={<Home></Home>} />
                 </Routes>
             </div>
         </div>
