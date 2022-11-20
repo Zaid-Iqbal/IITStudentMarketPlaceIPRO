@@ -106,6 +106,9 @@ class FilesUploadComponent extends Component{
                   <div>
                       <input type="text" id="description" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1"/>
                   </div>
+                  <div>
+                      <input type="text" id="condition" class="form-control" placeholder="Condition(New, Good, Used)" aria-label="Condition" aria-describedby="basic-addon1"/>
+                  </div>
                   <button type="button" class="btn btn-primary" onClick={this.uploadProduct}>Upload Product</button>
                   {/* <button onClick={this.alertLog} >This</button> */}
                 </div>
