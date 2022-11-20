@@ -35,7 +35,7 @@ class FilesUploadComponent extends Component{
       if(sessionStorage.getItem("user") == null)
       {
         console.log("user not defined. Rerouting to login page...");
-        window.location.href = "/localhost:300/";
+        window.location.href = "/";
       }
       else
       {
