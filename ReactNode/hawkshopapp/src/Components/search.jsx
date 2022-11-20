@@ -1,7 +1,9 @@
 import {Component} from "react";
 import ItemDisplay from "./itemDisplay";
-import item from "./item";
-import { test } from "./DB_functions";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+
 
 
 class Search extends Component{
@@ -50,41 +52,57 @@ class Search extends Component{
         this.setState({value: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
         
         
         var input = this.state.value.toLowerCase()
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
+            authDomain: "hawkshop-62355.firebaseapp.com",
+            projectId: "hawkshop-62355",
+            storageBucket: "hawkshop-62355.appspot.com",
+            messagingSenderId: "813719104855",
+            appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
+            measurementId: "G-31Q8NF975T"
+          };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const snapshot = await getDocs(collection(db, "products"));
+        snapshot.forEach((doc) => {
+            if (doc.data().name.includes(input)) {
+                console.log(doc.data().name);
+                items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
+            }
+          });
         
         //search in aws products
-        var mysql = require('mysql');
-        alert("SQL required");
-        var sql = "SELECT * FROM products WHERE productName = ?"
-        var con = mysql.createConnection({
-          host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
-          user: "admin",
-          password: "password", 
-          port: '3306',
-          database: "hs_db"
-        });
-        alert("Connection made");
-        con.query(sql, [input], function(err, result)
-        {
-            alert("Query Sent");
-            if (err) 
-                throw err;
-            else
-                var usersRows = JSON.parse(JSON.stringify(result));
-                for (let i = 0; i<usersRows.length; i++){
-                    if(usersRows[i]['name'].includes(input));{
-                        console.log(usersRows[i]['name'])
-                        this.state.items.push(usersRows[i]['name']);
-                    }
-                }
-                console.log(usersRows);
-        })
-        con.end();
+        // var mysql = require('mysql');
+        // var sql = "SELECT * FROM products WHERE name = ?"
+        // var con = mysql.createConnection({
+        //     host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+        //     user: "admin",
+        //     password: "password", 
+        //     port: '3306',
+        //     database: "hs_db"
+        //   });
+        // con.query(sql, input, function(err, result)
+        // {
+        //     if (err) 
+        //         throw err;
+        //     else
+        //         var usersRows = JSON.parse(JSON.stringify(result));
+        //         for (let i = 0; i<usersRows.length; i++){
+        //             if(usersRows[i]['name'].includes(input));{
+        //                 console.log(usersRows[i]['name'])
+        //                 items.push(usersRows[i]['name']);
+        //             }
+        //         }
+        //         console.log(usersRows);
+        // })
+        // con.end();
 
         var items = this.state.items
         // // this was demo search
