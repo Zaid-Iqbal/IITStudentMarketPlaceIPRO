@@ -2,6 +2,7 @@ import {Component} from "react";
 import ItemDisplay from "./itemDisplay";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 
 
@@ -46,7 +47,7 @@ class Search extends Component{
         this.setState({value: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
         
@@ -65,7 +66,13 @@ class Search extends Component{
           };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        
+        const snapshot = await getDocs(collection(db, "products"));
+        snapshot.forEach((doc) => {
+            if (doc.data().name.includes(input)) {
+                console.log(doc.data().name);
+                items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
+            }
+          });
         
         //search in aws products
         // var mysql = require('mysql');
