@@ -19,6 +19,7 @@ class FilesUploadComponent extends Component{
           name: null,
           img: null,
           description: null,
+          condition: null,
         };
    
        // if we are using arrow function binding is not required
@@ -30,6 +31,7 @@ class FilesUploadComponent extends Component{
       this.state.name = document.getElementById("ItemName").value; 
       this.state.price = document.getElementById("price").value;
       this.state.description = document.getElementById("description").value;
+      this.state.condition = document.getElementById("condition").value;
       this.state.img = this.state.image;
 
       if(sessionStorage.getItem("user") == null)
