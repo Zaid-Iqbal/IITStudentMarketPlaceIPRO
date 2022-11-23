@@ -5,7 +5,7 @@ const NavBar= () =>{
     return(
         <nav className='navbar navbar-light bg-light'>
             <a className="navbar-brand" href="http://localhost:3000/chat">
-                Chat
+                Upload
             </a>
             <a className="navbar-brand" href="http://localhost:3000/search">
                 Search

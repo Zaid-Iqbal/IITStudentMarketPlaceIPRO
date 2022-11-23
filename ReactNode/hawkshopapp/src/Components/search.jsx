@@ -70,8 +70,10 @@ class Search extends Component{
           };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        console.log(input);
         const snapshot = await getDocs(collection(db, "products"));
         snapshot.forEach((doc) => {
+            
             if (doc.data().name.includes(input)) {
                 console.log(doc.data().name);
                 this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})

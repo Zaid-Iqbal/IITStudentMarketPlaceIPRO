@@ -2,6 +2,7 @@ import {Component} from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { addDoc, collection } from "firebase/firestore"; 
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 class FilesUploadComponent extends Component{
 
@@ -117,6 +118,34 @@ class FilesUploadComponent extends Component{
         if (event.target.files && event.target.files[0]) {
           this.alertLog(event)
           let img = event.target.files[0];
+          var reader = new FileReader();
+          var fileByteArray = [];
+          reader.readAsArrayBuffer(img);
+          reader.onloadend = function (evt) {
+           if (evt.target.readyState === FileReader.DONE) {
+              var arrayBuffer = evt.target.result;
+              var array = new Uint8Array(arrayBuffer);
+              for (var i = 0; i < array.length; i++) {
+                fileByteArray.push(array[i]);
+              }
+            }
+          }
+          console.log(fileByteArray);
+          const firebaseConfig = {
+            apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
+            authDomain: "hawkshop-62355.firebaseapp.com",
+            projectId: "hawkshop-62355",
+            storageBucket: "hawkshop-62355.appspot.com",
+            messagingSenderId: "813719104855",
+            appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
+            measurementId: "G-31Q8NF975T"
+          };
+          const app = initializeApp(firebaseConfig);
+          const storage = getStorage(app);
+          const storageRef = ref(storage, 'some-child');
+          uploadBytes(storageRef, fileByteArray).then((snapshot) => {
+            console.log('Uploaded an array!');
+          });
           this.setState({
             image: URL.createObjectURL(img)
           });
