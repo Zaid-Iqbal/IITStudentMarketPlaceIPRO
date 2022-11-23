@@ -74,7 +74,7 @@ class Search extends Component{
         snapshot.forEach((doc) => {
             if (doc.data().name.includes(input)) {
                 console.log(doc.data().name);
-                items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
+                this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
             }
           });
         

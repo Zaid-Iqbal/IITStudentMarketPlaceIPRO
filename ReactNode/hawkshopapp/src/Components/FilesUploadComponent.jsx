@@ -91,25 +91,25 @@ class FilesUploadComponent extends Component{
       //   con.end();
       // }
 
-      var mysql = require('mysql');
-      var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
-      var con = mysql.createConnection({
-        host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
-        user: "admin",
-        password: "password", 
-        port: '3306',
-        database: "hs_db"
-      });
-      con.query(sql,[sessionStorage.getItem("user"), this.state.description, this.state.condition, this.state.price, this.state.name], function(err, result)
-      {
-        if (err) 
-          throw err;
-        else
-        {
-          console.log("Product Uploaded"+result);
-        }
-      })
-      con.end();
+      // var mysql = require('mysql');
+      // var sql = "INSERT INTO products (userID, description, itemCondition, price, productName) VALUES (?,?,?,?,?)"
+      // var con = mysql.createConnection({
+      //   host: "hs-db.crubpolzuyub.us-east-2.rds.amazonaws.com",
+      //   user: "admin",
+      //   password: "password", 
+      //   port: '3306',
+      //   database: "hs_db"
+      // });
+      // con.query(sql,[sessionStorage.getItem("user"), this.state.description, this.state.condition, this.state.price, this.state.name], function(err, result)
+      // {
+      //   if (err) 
+      //     throw err;
+      //   else
+      //   {
+      //     console.log("Product Uploaded"+result);
+      //   }
+      // })
+      // con.end();
       
     }
 
