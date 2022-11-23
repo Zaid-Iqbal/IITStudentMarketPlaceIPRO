@@ -53,11 +53,11 @@ class Search extends Component{
     }
 
     async handleSubmit(event) {
-        console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
         
         
-        var input = this.state.value.toLowerCase()
+        var input = String(this.state.value.toLowerCase());
+        console.log(input);
 
         const firebaseConfig = {
             apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
@@ -73,8 +73,14 @@ class Search extends Component{
         console.log(input);
         const snapshot = await getDocs(collection(db, "products"));
         snapshot.forEach((doc) => {
+<<<<<<< Updated upstream
             
             if (doc.data().name.includes(input)) {
+=======
+            var name = String(doc.data().name).toLowerCase();
+            console.log(name);
+            if (name.includes(input)) {
+>>>>>>> Stashed changes
                 console.log(doc.data().name);
                 this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
             }
