@@ -57,7 +57,6 @@ class Search extends Component{
         
         
         var input = String(this.state.value.toLowerCase());
-        console.log(input);
 
         const firebaseConfig = {
             apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
@@ -70,19 +69,11 @@ class Search extends Component{
           };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        console.log(input);
         const snapshot = await getDocs(collection(db, "products"));
         snapshot.forEach((doc) => {
-<<<<<<< Updated upstream
-            
-            if (doc.data().name.includes(input)) {
-=======
             var name = String(doc.data().name).toLowerCase();
-            console.log(name);
             if (name.includes(input)) {
->>>>>>> Stashed changes
-                console.log(doc.data().name);
-                this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
+                this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition, description: doc.data().description})
             }
           });
         

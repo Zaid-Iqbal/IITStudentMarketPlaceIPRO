@@ -20,6 +20,7 @@ class FilesUploadComponent extends Component{
           price: null,
           name: null,
           img: null,
+          imgType: null,
           description: null,
           condition: null,
         };
@@ -35,7 +36,21 @@ class FilesUploadComponent extends Component{
       this.state.description = document.getElementById("description").value;
       this.state.condition = document.getElementById("condition").value;
       this.state.img = this.state.image;
+      
+      
+      const metadata = {
+        contentType: null,
+      };
 
+      switch (this.state.imgType) {
+        case 'jpg':
+          metadata.contentType = 'image/jpeg';
+          break;
+        default:
+          alert(`File Type Not supported`);
+          return;
+      }
+      
       const firebaseConfig = {
         apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
         authDomain: "hawkshop-62355.firebaseapp.com",
@@ -59,6 +74,14 @@ class FilesUploadComponent extends Component{
       } catch (e) {
         console.error("Error adding document: ", e);
       }
+
+      //upload photo onto db
+      const storage = getStorage(app);
+      const storageRef = ref(storage, this.state.name);
+      uploadBytes(storageRef, this.state.img, metadata).then((snapshot) => {
+        console.log('Uploaded photo');
+      });
+      
       // if(sessionStorage.getItem("user") == null)
       // {
       //   console.log("user not defined. Rerouting to login page...");
@@ -115,6 +138,7 @@ class FilesUploadComponent extends Component{
     }
 
     onImageChange = event => {
+        var middleman;
         if (event.target.files && event.target.files[0]) {
           this.alertLog(event)
           let img = event.target.files[0];
@@ -122,34 +146,31 @@ class FilesUploadComponent extends Component{
           var fileByteArray = [];
           reader.readAsArrayBuffer(img);
           reader.onloadend = function (evt) {
-           if (evt.target.readyState === FileReader.DONE) {
+            if (evt.target.readyState === FileReader.DONE) {
               var arrayBuffer = evt.target.result;
               var array = new Uint8Array(arrayBuffer);
+              console.log("Array: \n");
+              console.log(array);
               for (var i = 0; i < array.length; i++) {
                 fileByteArray.push(array[i]);
               }
+
+              //Grab byte array from thread and store it in state
+              middleman = fileByteArray;
             }
           }
-          console.log(fileByteArray);
-          const firebaseConfig = {
-            apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
-            authDomain: "hawkshop-62355.firebaseapp.com",
-            projectId: "hawkshop-62355",
-            storageBucket: "hawkshop-62355.appspot.com",
-            messagingSenderId: "813719104855",
-            appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
-            measurementId: "G-31Q8NF975T"
-          };
-          const app = initializeApp(firebaseConfig);
-          const storage = getStorage(app);
-          const storageRef = ref(storage, 'some-child');
-          uploadBytes(storageRef, fileByteArray).then((snapshot) => {
-            console.log('Uploaded an array!');
-          });
+          
+          //save img data into state to be used for upload
+          this.state.img = middleman;
+          this.state.imgType = img.name.split('.')[1];
+
+          //set photo on view
           this.setState({
             image: URL.createObjectURL(img)
           });
         }
+
+        
     };
 
     alertLog(event){
