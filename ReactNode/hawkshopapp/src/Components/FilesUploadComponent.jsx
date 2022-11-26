@@ -2,7 +2,7 @@ import {Component} from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { addDoc, collection } from "firebase/firestore"; 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 
 class FilesUploadComponent extends Component{
 
@@ -24,6 +24,7 @@ class FilesUploadComponent extends Component{
           description: null,
           condition: null,
         };
+    
    
        // if we are using arrow function binding is not required
        this.uploadProduct = this.uploadProduct.bind(this);
@@ -35,7 +36,6 @@ class FilesUploadComponent extends Component{
       this.state.price = document.getElementById("price").value;
       this.state.description = document.getElementById("description").value;
       this.state.condition = document.getElementById("condition").value;
-      this.state.img = this.state.image;
       
       
       const metadata = {
@@ -77,10 +77,14 @@ class FilesUploadComponent extends Component{
 
       //upload photo onto db
       const storage = getStorage(app);
-      const storageRef = ref(storage, this.state.name);
-      uploadBytes(storageRef, this.state.img, metadata).then((snapshot) => {
-        console.log('Uploaded photo');
+      console.log("this.state.img in uploadProduct: " + String(this.state.img));
+      uploadBytes(ref(storage, this.state.name), this.state.img, metadata).then((snapshot) => {
+        console.log('Uploaded photo: ' + this.state.img);
       });
+
+      // uploadBytes(storageRef, this.state.img, metadata).then((snapshot) => {
+      //   console.log('Uploaded photo');
+      // });
       
       // if(sessionStorage.getItem("user") == null)
       // {
@@ -137,41 +141,49 @@ class FilesUploadComponent extends Component{
       
     }
 
+    
+
     onImageChange = event => {
-        var middleman;
-        if (event.target.files && event.target.files[0]) {
-          this.alertLog(event)
-          let img = event.target.files[0];
+      if (event.target.files && event.target.files[0]) {
+        this.alertLog(event)
+        let file = event.target.files[0];
+        var promise = Promise.resolve();
+        var fileByteArray = [];
+        let p = new Promise((resolve, reject) => {
           var reader = new FileReader();
-          var fileByteArray = [];
-          reader.readAsArrayBuffer(img);
-          reader.onloadend = function (evt) {
+          reader.onerror = reject;
+          reader.readAsArrayBuffer(file);
+          reader.onload = (function (evt) {
             if (evt.target.readyState === FileReader.DONE) {
               var arrayBuffer = evt.target.result;
               var array = new Uint8Array(arrayBuffer);
-              console.log("Array: \n");
-              console.log(array);
-              for (var i = 0; i < array.length; i++) {
-                fileByteArray.push(array[i]);
-              }
-
-              //Grab byte array from thread and store it in state
-              middleman = fileByteArray;
+              // console.log(array);
+              resolve(array);
             }
-          }
-          
-          //save img data into state to be used for upload
-          this.state.img = middleman;
-          this.state.imgType = img.name.split('.')[1];
-
-          //set photo on view
-          this.setState({
-            image: URL.createObjectURL(img)
           });
-        }
-
+        });
         
+        p.then((result) => {
+          // console.log("Result: " + String(result));
+          // set photo on view
+          this.setState({
+          image: URL.createObjectURL(file),
+          imgType: file.name.split('.')[1]
+        });
+
+        this.state.img = result;
+
+        // console.log("FileByteArray: " + String(fileByteArray));
+        // console.log("this.state.img: " + String(this.state.img));
+        })        
+      }      
     };
+    
+    ReadFile(file)
+    {
+      return 
+      
+    }
 
     alertLog(event){
       let img = event.target.files[0];
