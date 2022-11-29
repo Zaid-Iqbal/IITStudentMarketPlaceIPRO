@@ -1,4 +1,4 @@
-import {Component} from "react";
+import {Component, useState} from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { addDoc, collection } from "firebase/firestore"; 
@@ -16,6 +16,7 @@ class FilesUploadComponent extends Component{
     constructor(props) {
         super(props);
         this.state = {
+          imageZ: null,
           image: null,
           price: null,
           name: null,
@@ -28,8 +29,11 @@ class FilesUploadComponent extends Component{
    
        // if we are using arrow function binding is not required
        this.uploadProduct = this.uploadProduct.bind(this);
+       this.setImageUpload = this.uploadProduct();
         
     }
+
+    
 
     async uploadProduct(){
       this.state.name = document.getElementById("ItemName").value; 
