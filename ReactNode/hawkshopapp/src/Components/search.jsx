@@ -80,21 +80,6 @@ class Search extends Component{
             if (name.includes(input)) {
                 const storage = getStorage(app);
                 const img = getDownloadURL(ref(storage, doc.data().name)).then((url) => {
-
-                    // // This can be downloaded directly:
-                    // const xhr = new XMLHttpRequest();
-                    // xhr.responseType = 'blob';
-                    // xhr.onload = (event) => {
-                    //     const blob = xhr.response;
-                    // };
-                    // xhr.open('GET', url);
-                    // xhr.send();
-
-                    // Or inserted into an <img> element
-                    // return document.getElementById(doc.data().name);
-                    // img.setAttribute('src', url);
-                    
-                    // return getBytes(ref(storage, ('gs://hawkshop-62355.appspot.com/' + String(doc.data().name))));
                     console.log("img: " + String(url));
                     this.state.items.push({pic: url, id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition, description: doc.data().description})
                     var items = this.state.items;

@@ -1,5 +1,13 @@
 import {Component} from "react";
 import { conntectToDB } from "./demo_db_connection";
+import { initializeApp } from "firebase/app";
+import { getFirestore,collection, getDocs } from "firebase/firestore";
+import Account from "./account";
+import {
+    Route,
+    Navigate,
+    useNavigate
+  } from 'react-router-dom'
 
 class LoginPage extends Component{
 
@@ -17,15 +25,40 @@ class LoginPage extends Component{
     }
     
     handleSubmit(event) {
-        conntectToDB();
-        event.preventDefault();
+        // conntectToDB();
         // leave these for zaid to use with the database
         const email = event.target[0].value;
         const password = event.target[1].value;
-        sessionStorage.setItem("user",email);
-    }
 
-    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
+            authDomain: "hawkshop-62355.firebaseapp.com",
+            projectId: "hawkshop-62355",
+            storageBucket: "hawkshop-62355.appspot.com",
+            messagingSenderId: "813719104855",
+            appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
+            measurementId: "G-31Q8NF975T"
+          };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        
+        const snapshot = getDocs(collection(db, "users")).then((snapshot) => {
+            snapshot.forEach((doc) => {
+                // Downloads the record
+                if (String(doc.data().email).toLowerCase() == email && String(doc.data().password) == password) {
+                    sessionStorage.setItem("user",email);
+                    // useNavigate("/account");
+                    window.location = "/account";
+                }
+                else{
+                    alert('Username and/or password is incorrect');
+                }
+            });
+        });
+
+        event.preventDefault();
+    }
 
     render(){
         return (

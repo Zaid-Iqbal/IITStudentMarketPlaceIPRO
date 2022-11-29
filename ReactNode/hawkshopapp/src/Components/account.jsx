@@ -1,9 +1,18 @@
 import {Component} from "react";
 import ItemDisplayA from "./itemDisplayA";
+import { initializeApp } from "firebase/app";
+import { getFirestore,collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, getBytes  } from "firebase/storage";
+
 
 class Account extends Component{
     constructor() {
         super();
+
+        this.state = {
+            orgitems: []
+        }
+
         // this.state = {value: '',
         //     orgitems:[
         //         // dummy data
@@ -31,18 +40,44 @@ class Account extends Component{
 
         // };
         
-        this.state = {
-            items: []
-        }
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
+            authDomain: "hawkshop-62355.firebaseapp.com",
+            projectId: "hawkshop-62355",
+            storageBucket: "hawkshop-62355.appspot.com",
+            messagingSenderId: "813719104855",
+            appId: "1:813719104855:web:b89ec6f1c67784ab4fe212",
+            measurementId: "G-31Q8NF975T"
+          };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
+        const snapshot = getDocs(collection(db, "users")).then((snapshot) => {
+            snapshot.forEach((doc) => {
+                var email = sessionStorage.getItem("user");
+                const storage = getStorage(app);
+                const img = getDownloadURL(ref(storage, doc.data().name)).then((url) => {
+                    return url;
+                }).catch((error) => {
+                    console.log("error getting pic for record:" + doc.data().name + "\nError Message: " + error);
+                    return null;
+                });
+                // Downloads the record
+                if (String(doc.data().email).toLowerCase() == email) {
+                    this.state.items.push({key: doc.id, pic: img, name: doc.data().name , price: doc.data().price, condition: doc.data().condition})
+                }
+            });
+            var items = this.state.items;
+            this.setState({items});
+        });
     }
-
 
     render() {
 
         return(
             <div>
-
+                <h1>Account</h1>
+                <h2>Email: {sessionStorage.getItem("user")}</h2>
                 <a  href="http://localhost:3000/upload" >
                     <button type="button" className="btn btn-primary btn-floating" >Add New Item</button>
                 </a>
@@ -53,6 +88,5 @@ class Account extends Component{
 }
 
 // todo get floating add button
-
 
 export default Account;
