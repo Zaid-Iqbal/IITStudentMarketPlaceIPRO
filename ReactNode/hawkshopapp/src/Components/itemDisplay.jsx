@@ -4,27 +4,33 @@ import {Component} from "react";
 import Item from "./item";
 
 class ItemDisplay extends Component{
-    /*
+    
     state ={
         items : [
-            {id:'1230', name:'Hi', price:23, condition:'Bad' },
-            {id:'1231', name:'Hello', price:450, condition:'Fair' },
-            {id:'1232', name:'Bye', price:203, condition:'Good' }
+            // {id:'1230', name:'Hi', price:23, condition:'Bad' },
+            // {id:'1231', name:'Hello', price:450, condition:'Fair' },
+            // {id:'1232', name:'Bye', price:203, condition:'Good' }
         ]
-    }*/
+    }
 
-    render() {
+    render() { 
         return(
             <div class='p-2'>
-
-
                 {this.props.items.map(item => (
-                    <Item key = {item.id}
-                          name = {item.name}
-                          price = {item.price}
-                          condition = {item.condition}
-                          id={item.id}
-                          item={item}>
+                    <Item 
+                        // pic = {function(){
+                        //     console.log(item.pic);
+                        //     return <img src={item.pic} alt='Image Not Found'/>
+                        //     }
+                        // }
+                        pic = {item.pic}
+                        key = {item.id}
+                        name = {item.name}
+                        price = {item.price}
+                        condition = {item.condition}
+                        // id={item.id}
+                        // item={item}
+                        >
                     </Item>
                 ))}
             </div>

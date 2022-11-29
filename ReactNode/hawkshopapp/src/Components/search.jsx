@@ -1,9 +1,8 @@
 import {Component} from "react";
 import ItemDisplay from "./itemDisplay";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
-
+import { getFirestore,collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, getBytes  } from "firebase/storage";
 
 
 class Search extends Component{
@@ -45,7 +44,6 @@ class Search extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         
-
     }
 
     handleChange(event) {
@@ -53,11 +51,9 @@ class Search extends Component{
     }
 
     async handleSubmit(event) {
-        console.log(this.state.value);
         alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
         
-        
-        var input = this.state.value.toLowerCase()
+        var input = String(this.state.value.toLowerCase());
 
         const firebaseConfig = {
             apiKey: "AIzaSyDdqPURRGGaGgWDyZQPg_2GFuCwvA2VAWQ",
@@ -70,15 +66,46 @@ class Search extends Component{
           };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        console.log(input);
+        
+        //get product info
         const snapshot = await getDocs(collection(db, "products"));
+        
+        
+
         snapshot.forEach((doc) => {
-            
-            if (doc.data().name.includes(input)) {
-                console.log(doc.data().name);
-                this.state.items.push({id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition})
+            // name of record
+            var name = String(doc.data().name).toLowerCase();
+
+            // Downloads the file
+            if (name.includes(input)) {
+                const storage = getStorage(app);
+                const img = getDownloadURL(ref(storage, doc.data().name)).then((url) => {
+
+                    // // This can be downloaded directly:
+                    // const xhr = new XMLHttpRequest();
+                    // xhr.responseType = 'blob';
+                    // xhr.onload = (event) => {
+                    //     const blob = xhr.response;
+                    // };
+                    // xhr.open('GET', url);
+                    // xhr.send();
+
+                    // Or inserted into an <img> element
+                    // return document.getElementById(doc.data().name);
+                    // img.setAttribute('src', url);
+                    
+                    // return getBytes(ref(storage, ('gs://hawkshop-62355.appspot.com/' + String(doc.data().name))));
+                    console.log("img: " + String(url));
+                    this.state.items.push({pic: url, id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition, description: doc.data().description})
+                    var items = this.state.items;
+                    this.setState({items});
+                    console.log("items set img: " + this.state.items[0].pic);
+                }).catch((error) => {
+                    console.log(error);
+                });
+                
             }
-          });
+        });
         
         //search in aws products
         // var mysql = require('mysql');
@@ -106,7 +133,8 @@ class Search extends Component{
         // })
         // con.end();
 
-        var items = this.state.items
+        // var items = this.state.items
+        // console.log("Contents of Items Array: " + items.toString());
         // // this was demo search
         // const items = [];
         // for (let i = 0; i<this.state.orgitems.length; i++){
@@ -116,7 +144,6 @@ class Search extends Component{
         //     }
         // }
 
-        this.setState({items});
 
         // end demo
         event.preventDefault(); // recieve data, and then pass in data
@@ -124,10 +151,7 @@ class Search extends Component{
 
     render() {
         return(
-
             <div class='m-2'>
-
-
                 <div className="input-group">
                     <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
                            aria-describedby="search-addon" onChange={this.handleChange}/>

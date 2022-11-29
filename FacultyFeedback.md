@@ -66,5 +66,12 @@ Please add an item to your boards to do this github.com/mschray/IPro497Sample/bl
 - For the dry run week, I'll give you about an hour of time to organize yourselves via team work time and then we'll all come back to the main room and I'll pick teams to present in random order
 
 ## Week 14 ##
+  - Like the name and logo, but once you are outside of IIT what are you going to call it?  Shouldn't you call it that now?
+- You personas are actually scenarios (https://www.agilealliance.org/glossary/personas)
+- Too much text on slide above
+- Demo scenario - why not use Julia instead of a user?
+- Don't show the database - assume you are demoing from a user using your sites perspective 
+- Demo what about a description of the item not just a title.
+- Payments could be challenging
 
 ## Week 15 ##
