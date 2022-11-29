@@ -13,16 +13,17 @@ class ItemDisplay extends Component{
         ]
     }
 
-    render() {
+    render() { 
         return(
             <div class='p-2'>
                 {this.props.items.map(item => (
                     <Item 
-                        pic = {function(){
-                            console.log(item.pic);
-                            return <img src={item.pic} alt='Image Not Found'/>
-                        }
-                        }
+                        // pic = {function(){
+                        //     console.log(item.pic);
+                        //     return <img src={item.pic} alt='Image Not Found'/>
+                        //     }
+                        // }
+                        pic = {item.pic}
                         key = {item.id}
                         name = {item.name}
                         price = {item.price}
