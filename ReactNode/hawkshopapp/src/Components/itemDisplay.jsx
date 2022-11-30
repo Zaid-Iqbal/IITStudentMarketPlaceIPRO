@@ -28,7 +28,7 @@ class ItemDisplay extends Component{
                         name = {item.name}
                         price = {item.price}
                         condition = {item.condition}
-                        // id={item.id}
+                        id={item.id}
                         // item={item}
                         >
                     </Item>
