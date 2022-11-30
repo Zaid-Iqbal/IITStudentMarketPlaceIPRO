@@ -69,9 +69,6 @@ class Search extends Component{
         
         //get product info
         const snapshot = await getDocs(collection(db, "products"));
-        
-        
-
         snapshot.forEach((doc) => {
             // name of record
             var name = String(doc.data().name).toLowerCase();
@@ -79,7 +76,7 @@ class Search extends Component{
             // Downloads the file
             if (name.includes(input)) {
                 const storage = getStorage(app);
-                const img = getDownloadURL(ref(storage, doc.data().name)).then((url) => {
+                const img = getDownloadURL(ref(storage, doc.data().imgTag)).then((url) => {
                     console.log("img: " + String(url));
                     this.state.items.push({pic: url, id: doc.id, name: doc.data().name, price: doc.data().price, condition: doc.data().condition, description: doc.data().description})
                     var items = this.state.items;

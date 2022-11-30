@@ -50,8 +50,14 @@ class FilesUploadComponent extends Component{
         case 'jpg':
           metadata.contentType = 'image/jpeg';
           break;
+        case 'webp':
+          metadata.contentType = 'image/webp';
+          break;
+        case 'png':
+          metadata.contentType = 'image/png';
+          break;
         default:
-          alert(`File Type Not supported`);
+          alert(`File Type Not supported: ` + this.state.imgType);
           return;
       }
       
@@ -72,6 +78,8 @@ class FilesUploadComponent extends Component{
           price: this.state.price,
           description: this.state.description,
           condition: this.state.condition,
+          email: sessionStorage.getItem("user"),
+          imgTag: sessionStorage.getItem("imgTag")
         });
       
         console.log("Document written with ID: ", docRef.id);
@@ -85,6 +93,7 @@ class FilesUploadComponent extends Component{
       uploadBytes(ref(storage, this.state.name), this.state.img, metadata).then((snapshot) => {
         console.log('Uploaded photo: ' + this.state.img);
       });
+      alert("Successful Upload!");
 
       // uploadBytes(storageRef, this.state.img, metadata).then((snapshot) => {
       //   console.log('Uploaded photo');
@@ -151,6 +160,7 @@ class FilesUploadComponent extends Component{
       if (event.target.files && event.target.files[0]) {
         this.alertLog(event)
         let file = event.target.files[0];
+        sessionStorage.setItem("imgTag", file.name.split(".")[0]);
         var promise = Promise.resolve();
         var fileByteArray = [];
         let p = new Promise((resolve, reject) => {
@@ -171,9 +181,9 @@ class FilesUploadComponent extends Component{
           // console.log("Result: " + String(result));
           // set photo on view
           this.setState({
-          image: URL.createObjectURL(file),
-          imgType: file.name.split('.')[1]
-        });
+            image: URL.createObjectURL(file),
+            imgType: file.name.split('.')[1]
+          });
 
         this.state.img = result;
 

@@ -1,4 +1,7 @@
 import {Component} from "react";
+import { initializeApp } from "firebase/app";
+import { getFirestore,collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, getBytes  } from "firebase/storage";
 
 class ItemPageS extends Component{
     constructor() {

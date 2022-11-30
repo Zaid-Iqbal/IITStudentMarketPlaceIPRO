@@ -4,6 +4,7 @@
 // could be used for search and account
 import {Component} from "react";
 import ItemA from "./itemA";
+// import Item from "./item";
 
 class ItemDisplay extends Component{
     
@@ -24,6 +25,7 @@ class ItemDisplay extends Component{
                             name = {item.name}
                             price = {item.price}
                             condition = {item.condition}
+                            email = {item.email}
                             // id={item.id}
                             // item={item}
                             

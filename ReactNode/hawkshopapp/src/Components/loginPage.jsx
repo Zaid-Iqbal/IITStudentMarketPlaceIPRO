@@ -8,6 +8,7 @@ import {
     Navigate,
     useNavigate
   } from 'react-router-dom'
+import Item from "./itemA";
 
 class LoginPage extends Component{
 
@@ -49,14 +50,10 @@ class LoginPage extends Component{
                 if (String(doc.data().email).toLowerCase() == email && String(doc.data().password) == password) {
                     sessionStorage.setItem("user",email);
                     // useNavigate("/account");
-                    window.location = "/account";
-                }
-                else{
-                    alert('Username and/or password is incorrect');
+                    window.location = "/account";                    
                 }
             });
         });
-
         event.preventDefault();
     }
 

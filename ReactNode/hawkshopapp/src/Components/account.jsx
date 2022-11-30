@@ -1,5 +1,6 @@
 import {Component} from "react";
 import ItemDisplayA from "./itemDisplayA";
+// import ItemDisplay from "./itemDisplay";
 import { initializeApp } from "firebase/app";
 import { getFirestore,collection, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, getBytes  } from "firebase/storage";
@@ -51,24 +52,28 @@ class Account extends Component{
           };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        const snapshot = getDocs(collection(db, "users")).then((snapshot) => {
+        var records = [];
+        getDocs(collection(db, "products")).then((snapshot) => {
             snapshot.forEach((doc) => {
                 var email = sessionStorage.getItem("user");
-                const storage = getStorage(app);
-                const img = getDownloadURL(ref(storage, doc.data().name)).then((url) => {
-                    return url;
-                }).catch((error) => {
-                    console.log("error getting pic for record:" + doc.data().name + "\nError Message: " + error);
-                    return null;
-                });
                 // Downloads the record
                 if (String(doc.data().email).toLowerCase() == email) {
-                    this.state.items.push({key: doc.id, pic: img, name: doc.data().name , price: doc.data().price, condition: doc.data().condition})
+                    console.log("Found record: " + String(doc.data().name));
+                    const storage = getStorage(app);
+                    const storageRef = ref(storage, doc.data().imgTag);
+                    const img = getDownloadURL(storageRef).then((url) => {
+                        // return url;
+                        records.push({key: doc.id, pic: url, name: doc.data().name , price: doc.data().price, condition: doc.data().condition, email: doc.data().email})
+                        this.state.orgitems = records;
+                        this.setState({records});
+                    }).catch((error) => {
+                        console.log("error getting pic for record:" + doc.data().name + "\nError Message: " + error);
+                        return null;
+                    });
+                    // records.push({key: doc.id, pic: img, name: doc.data().name , price: doc.data().price, condition: doc.data().condition, email: doc.data().email})
                 }
             });
-            var items = this.state.items;
-            this.setState({items});
+            
         });
     }
 
