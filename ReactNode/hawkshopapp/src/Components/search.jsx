@@ -52,7 +52,7 @@ class Search extends Component{
 
     async handleSubmit(event) {
         // alert('A name was submitted: ' + this.state.value);// instead of this we send this.state.val to back
-        
+        this.state.items = [];
         var input = String(this.state.value.toLowerCase());
 
         const firebaseConfig = {

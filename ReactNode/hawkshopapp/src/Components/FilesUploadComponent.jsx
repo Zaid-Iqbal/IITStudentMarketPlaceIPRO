@@ -89,8 +89,8 @@ class FilesUploadComponent extends Component{
 
       //upload photo onto db
       const storage = getStorage(app);
-      console.log("this.state.img in uploadProduct: " + String(this.state.img));
-      uploadBytes(ref(storage, this.state.name), this.state.img, metadata).then((snapshot) => {
+      // console.log("this.state.img in uploadProduct: " + String(this.state.img));
+      uploadBytes(ref(storage, "/"+sessionStorage.getItem("imgTag")), this.state.img, metadata).then((snapshot) => {
         console.log('Uploaded photo: ' + this.state.img);
       });
       alert("Successful Upload!");
